@@ -1,5 +1,10 @@
 require 'spec_helper'
 
 describe Post do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "mass assignment" do
+    [:title, :content].each do |attr|
+      it { should allow_mass_assignment_of(attr) }
+    end
+  end
+  
 end
