@@ -13,4 +13,8 @@ describe Post do
     end
   end
 
+  describe "Associations" do
+    it { should belong_to(:user) }
+  end
+
 end

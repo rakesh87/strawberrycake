@@ -12,5 +12,9 @@ describe User do
       it { should validate_presence_of(attr) }
     end
   end
+
+  describe "associations" do
+    it { should have_many(:posts).dependent(:destroy) }
+  end
   
 end
