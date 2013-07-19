@@ -1,5 +1,10 @@
 require 'spec_helper'
 
 describe User do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "mass assignment" do
+    [:name, :email].each do |attr|
+      it { should allow_mass_assignment_of(attr) }
+    end
+  end
+  
 end
