@@ -2,6 +2,6 @@ class PostsController < ApplicationController
 
   def index
     #listar os posts
-    @post = Post.all
+    @posts = Post.all
   end
 end
