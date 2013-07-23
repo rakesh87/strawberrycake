@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
 
   def index
-    #listar os posts
     @posts = Post.all
+  end
+
+  def new
   end
 end

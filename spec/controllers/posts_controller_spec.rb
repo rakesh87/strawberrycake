@@ -10,4 +10,13 @@ describe PostsController do
       it { should respond_with(:success) }
       it { should render_template(:index) }
   end
+
+  describe "GET 'new'" do
+    before do
+        get :new
+      end
+
+      it { should respond_with(:success) }
+      it { should render_template(:new) }
+  end
 end
