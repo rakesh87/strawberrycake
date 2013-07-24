@@ -30,6 +30,10 @@ describe PostsController do
     it { should respond_with(:success) }
     it { should render_template(:new) }
     it { should render_with_layout(:application) }
+
+    it "should assign a new post" do
+      assigns(:post).should be_a_new(Post)
+    end
   end
 
   describe "GET 'show'" do
