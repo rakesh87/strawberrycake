@@ -57,12 +57,47 @@ describe PostsController do
       end
     end
     
-    context "with a invalid param" do
+    context "with an invalid param" do
 
       it "should raise error" do
           expect do
             get :show, id: 'wrong'
           end.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end  
+  end
+
+  describe "DELETE destroy" do
+
+    context "with a valid param" do
+
+      let!(:post) do
+        create(:post)
+      end
+
+      it "should destroy the post" do
+        expect do
+          delete :destroy, id: post
+        end.to change(Post, :count).by(-1)
+      end
+
+      it "should redirects to post index" do
+        delete :destroy, id: post
+        should redirect_to(root_path)
+      end
+
+      it "should set the flash correctly" do
+        delete :destroy, id: post
+        should set_the_flash[:notice].to(/sucesso/)
+      end
+    end
+
+    context "with an invalid param" do
+      
+      it "should raise error" do
+        expect do
+          delete :destroy, id: 'wrong'
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end  
   end
