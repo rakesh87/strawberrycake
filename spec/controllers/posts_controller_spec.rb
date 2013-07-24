@@ -63,7 +63,7 @@ describe PostsController do
 
       it "should redirects to the root path" do
         post :create, params
-        should redirect_to(root_path)
+        should redirect_to(posts_path)
       end
 
       it "should set the flash correctly" do
@@ -143,7 +143,7 @@ describe PostsController do
 
       it "should redirects to post index" do
         delete :destroy, id: post
-        should redirect_to(root_path)
+        should redirect_to(posts_path)
       end
 
       it "should set the flash correctly" do
@@ -221,7 +221,7 @@ describe PostsController do
 
       it "should redirects to root_path" do
         put :update, params
-        should redirect_to(root_path)
+        should redirect_to(posts_path)
       end
 
       it "should set the flash correctly" do

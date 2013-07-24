@@ -6,7 +6,7 @@ describe PostsController do
   describe "routing" do
 
     it "routes to #index" do
-      get("/").should route_to("posts#index")
+      get("/posts").should route_to("posts#index")
     end
 
     it "routes to #new" do
@@ -36,16 +36,16 @@ describe PostsController do
 
    describe "route helpers" do
 
-    it "root_path" do
+    xit "root_path" do
       root_path.should eq("/")
-    end
-
-    it "new_post_path" do
-      new_post_path.should eq("/posts/new")
     end
 
     it "posts_path" do
       posts_path.should eq("/posts")
+    end
+
+    it "new_post_path" do
+      new_post_path.should eq("/posts/new")
     end
 
     it "post_path" do

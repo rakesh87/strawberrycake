@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(params[:post])
     if @post.save
-      redirect_to root_path, notice: "Post criado com sucesso!"
+      redirect_to posts_path, notice: "Post criado com sucesso!"
     else
       render 'new'
     end
@@ -28,7 +28,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update_attributes(params[:post])
-      redirect_to root_path, notice: "Post atualizado com sucesso!"
+      redirect_to posts_path, notice: "Post atualizado com sucesso!"
     else
       render 'edit'
     end
@@ -37,6 +37,6 @@ class PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
-    redirect_to root_path, notice: "Post deletado com sucesso!"
+    redirect_to posts_path, notice: "Post deletado com sucesso!"
   end
 end
