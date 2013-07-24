@@ -3,20 +3,30 @@ require 'spec_helper'
 describe PostsController do
   
   describe "GET 'index'" do
-    before do
-        get :index
-      end
+    
+    let!(:post) do
+      create(:post)
+    end
 
-      it { should respond_with(:success) }
-      it { should render_template(:index) }
+    before do
+      get :index
+    end
+
+    it { should respond_with(:success) }
+    it { should render_template(:index) }
+    it { should render_with_layout(:application) }
+
+    it "should assign all posts" do
+      assigns(:posts).should include(post)
+    end
   end
 
   describe "GET 'new'" do
     before do
-        get :new
-      end
+      get :new
+    end
 
-      it { should respond_with(:success) }
-      it { should render_template(:new) }
+    it { should respond_with(:success) }
+    it { should render_template(:new) }
   end
 end
