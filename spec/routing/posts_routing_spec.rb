@@ -13,6 +13,10 @@ describe PostsController do
       get("/posts/new").should route_to("posts#new")
     end
 
+    it "routes to #create" do
+      post("/posts").should route_to("posts#create")
+    end
+
     it "routes to #show" do
       get("/posts/1").should route_to("posts#show", id: "1")
     end
@@ -30,6 +34,10 @@ describe PostsController do
 
     it "new_post_path" do
       new_post_path.should eq("/posts/new")
+    end
+
+    it "posts_path" do
+      posts_path.should eq("/posts")
     end
 
     it "post_path" do
