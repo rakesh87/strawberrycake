@@ -36,6 +36,65 @@ describe PostsController do
     end
   end
 
+  describe "POST create" do
+
+    context "with valid params" do
+
+      let(:params) do
+        { post:  attributes_for(:post) }
+      end
+
+      it "should create a new post" do
+        expect do
+          post :create, params
+        end.to change(Post, :count).by(1)
+      end
+
+      it "should assigns a newly @post" do
+        post :create, params
+        assigns(:post).should be_a(Post)
+      end
+
+      it "should @post be persisted" do
+        post :create, params
+        assigns(:post).should be_persisted
+      end
+
+      it "should redirects to the root path" do
+        post :create, params
+        should redirect_to(root_path)
+      end
+
+      it "should set the flash correctly" do
+        post :create, params
+        should set_the_flash[:notice].to(/sucesso/)
+      end
+    end  
+
+    context "with invalid params" do
+
+      let(:params) do
+        { post:  attributes_for(:post, content: "") }
+      end
+
+      it "should not create a new post" do
+        expect do
+          post :create, params
+        end.to_not change(Post, :count)
+      end
+
+      it "should assign @post with a new one" do
+        post :create, params
+        assigns(:post).should be_a_new(Post)
+      end
+
+      it "should re-render the 'new' template" do
+          post :create, params
+          should render_template("new")
+      end
+    end  
+  end  
+
   describe "GET 'show'" do
 
     context "with a valid param" do
