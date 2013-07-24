@@ -13,5 +13,6 @@ describe PostsController do
 
     it "root_path" do
       root_path.should eq("/")
-    end  
+    end
+  end    
 end
