@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'spec_helper'
 
 describe PostsController do
@@ -188,6 +189,70 @@ describe PostsController do
         expect do
           get :edit, id: 'wrong'
         end.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+  end
+
+  describe "PUT 'update'" do
+
+    let(:post) do
+      create(:post)
+    end
+
+    context "with valid params" do
+
+      let(:params) do
+        {
+          id: post,
+          post:  attributes_for(:post, title: "Trakinas meio a meio", content: "Chocolícia, Cookies, Piraquê de Morango =P")
+        }
+      end
+
+      it "should update the post" do
+        expect do
+          put :update, params
+        end.to change{ post.reload.title }.from("Trakinas de morango").to("Trakinas meio a meio")
+      end
+
+      it "should assigns correct @post" do
+        put :update, params
+        assigns(:post).should eq(post)
+      end
+
+      it "should redirects to root_path" do
+        put :update, params
+        should redirect_to(root_path)
+      end
+
+      it "should set the flash correctly" do
+        put :update, params
+        should set_the_flash[:notice].to(/sucesso/)
+      end
+    end
+
+    context "with invalid params" do
+
+      let(:params) do
+        {
+          id: post,
+          post:  attributes_for(:post, title: "")
+        }
+      end
+
+      it "should not update the post" do
+        expect do
+          put :update, params
+        end.to_not change{ post.title }
+      end
+
+      it "should assign correct @post" do
+        put :update, params
+        assigns(:post).should eq(post)
+      end
+
+      it "should re-render the 'edit' template" do
+        put :update, params
+        should render_template("edit")
       end
     end
   end
