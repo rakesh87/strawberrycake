@@ -5,13 +5,15 @@ describe PostsController do
   describe "routing" do
 
     it "routes to #index" do
-      get(root_path).should route_to("posts#index")
-      root_path.should eq('/')
+      get("/").should route_to("posts#index")
     end
 
     it "routes to #new" do
-      get(new_post_path).should route_to("posts#new")
-      new_post_path.should eq('/posts/new')
+      get("/posts/new").should route_to("posts#new")
+    end
+
+    it "routes to #show" do
+      get("/posts/1").should route_to("posts#show", id: "1")
     end
   end
 end
