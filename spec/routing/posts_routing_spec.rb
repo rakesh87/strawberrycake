@@ -24,6 +24,10 @@ describe PostsController do
     it "routes to #destroy" do
       delete("/posts/1").should route_to("posts#destroy", :id => "1")
     end
+
+    it "routes to #edit" do
+      get("/posts/1/edit").should route_to("posts#edit", :id => "1")
+    end
   end
 
    describe "route helpers" do
@@ -42,6 +46,10 @@ describe PostsController do
 
     it "post_path" do
       post_path(1).should eq("/posts/1")
+    end
+
+    it "edit_post_path" do
+      edit_post_path(1).should eq("/posts/1/edit")
     end
   end      
 end
