@@ -34,11 +34,7 @@ describe PostsController do
     end
   end
 
-   describe "route helpers" do
-
-    xit "root_path" do
-      root_path.should eq("/")
-    end
+  describe "route helpers" do
 
     it "posts_path" do
       posts_path.should eq("/posts")
