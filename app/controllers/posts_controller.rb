@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_filter :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @posts = Post.all
@@ -18,15 +19,13 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
   end
 
   def edit
-    @post = Post.find(params[:id])
+    
   end
 
   def update
-    @post = Post.find(params[:id])
     if @post.update_attributes(params[:post])
       redirect_to posts_path, notice: "Post atualizado com sucesso!"
     else
@@ -35,8 +34,11 @@ class PostsController < ApplicationController
   end  
 
   def destroy
-    post = Post.find(params[:id])
-    post.destroy
+    @post.destroy
     redirect_to posts_path, notice: "Post deletado com sucesso!"
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
   end
 end
