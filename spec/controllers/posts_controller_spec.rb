@@ -36,7 +36,7 @@ describe PostsController do
     end
   end
 
-  describe "POST create" do
+  describe "POST 'create'" do
 
     context "with valid params" do
 
@@ -159,5 +159,36 @@ describe PostsController do
         end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end  
+  end
+
+  describe "POST 'edit'" do
+
+    context "with a valid param" do
+
+      let!(:post) do
+        create(:post)
+      end
+
+      before do
+        get :edit, id: post
+      end
+
+      it { should respond_with(:success) }
+      it { should render_template(:edit) }
+      it { should render_with_layout(:application) }
+
+      it "should assign post" do
+        assigns(:post).should eq(post)
+      end
+    end
+
+    context "with an invalid param" do
+
+      it "should raise error" do
+        expect do
+          get :edit, id: 'wrong'
+        end.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
   end
 end
