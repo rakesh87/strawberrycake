@@ -1,10 +1,15 @@
 %h2 Posts
 
-
-- if @posts.empty? 
+- if @posts.any?
+  %table
+    %thead
+      %tr
+        %th Título
+        %th Conteúdo
+    %tbody 
+      - @posts.each do |post|
+        %tr
+          %td= post.title
+          %td= link_to(post.content, post_path(post.id))
+- else
   %p Não há posts publicados
-- else  
-  %ul
-    - @posts.each do |post|
-      %li
-        = post.title   
