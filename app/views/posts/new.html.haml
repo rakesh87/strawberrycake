@@ -1,6 +1,10 @@
 %h2 New Post
 
-= simple_form_for [@post] do |f|
-  = f.input :title
-  = f.input :content
+= form_for(@post) do |f|
+  %p
+    Título:
+    = f.text_field :title
+  %p
+    Conteúdo:  
+    = f.text_field :content
   = f.submit 'Enviar'
