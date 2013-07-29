@@ -6,10 +6,13 @@
       %tr
         %th Título
         %th Conteúdo
+        %th Ações
     %tbody 
       - @posts.each do |post|
         %tr
           %td= post.title
           %td= link_to(post.content, post_path(post.id))
+          %td 
+            = link_to "Editar", edit_post_path(post.id) 
 - else
   %p Não há posts publicados
