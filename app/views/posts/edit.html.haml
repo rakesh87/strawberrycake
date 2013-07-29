@@ -1,0 +1,8 @@
+%h2 Editar Post
+
+= form_for @post do |f|
+  = f.label :title, 'Título'
+  = f.text_field :title
+  = f.label :content, 'Conteúdo'
+  = f.text_field :content
+  = f.submit 'Enviar'
