@@ -38,6 +38,8 @@ class PostsController < ApplicationController
     redirect_to posts_path, notice: "Post deletado com sucesso!"
   end
 
+  private
+
   def set_post
     @post = Post.find(params[:id])
   end
