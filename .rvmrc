@@ -46,3 +46,6 @@ fi
 # then
 #   bundle install | GREP_OPTIONS= \grep -vE '^Using|Your bundle is complete'
 # fi
+
+export FACEBOOK_APP_KEY= 304581076354820
+export FACEBOOK_APP_SECRET= 41a5d0836edb607adc84c86b29b4f79a
