@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
+  attr_accessible :email, :name, :access_token, :uid, :provider, :photo_url
 
-  validates :uid, :email, :access_token, :provider, presence: true
-  validates :uid, :email, uniqueness: true
-  
+  validates :email, :access_token, :name, :uid, presence: true
+  validates :email, uniqueness: true
+
   has_many :posts, dependent: :destroy
 
   def self.find_or_create_with_omniauth(auth)
