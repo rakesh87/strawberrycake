@@ -1,6 +1,16 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
+  sequence :uid do |n|
+    "%09d" % n
+  end
+
+  sequence :email do |n|
+    "person#{n}@example.com"
+  end
+
   factory :user do
+    uid
+    email
+    access_token '12345#@!'
+    provider 'facebook'
   end
 end
