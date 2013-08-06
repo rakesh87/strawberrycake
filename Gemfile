@@ -25,7 +25,7 @@ group :assets do
 end
 
 group :development do
-  gem 'jumpup',    github: 'Helabs/jumpup' 
+  gem 'jumpup',             '0.0.1'
   gem 'better_errors',      '0.9.0'
   gem 'binding_of_caller',  '0.7.2'
   gem "letter_opener",      '1.1.1'
