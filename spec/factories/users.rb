@@ -10,6 +10,7 @@ FactoryGirl.define do
   factory :user do
     uid
     email
+    name 'Flavia'
     access_token '12345#@!'
     provider 'facebook'
   end
