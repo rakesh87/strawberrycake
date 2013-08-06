@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/Helabs/jumpup.git
+  revision: 3c64fa05baa96a6fee03115d11b4e691c6727c2d
+  specs:
+    jumpup (0.0.1)
+      hpricot
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -84,8 +91,6 @@ GEM
       haml (>= 3.1, < 4.1)
       railties (>= 3.1, < 4.1)
     hashie (2.0.5)
-    he_integration (0.0.2)
-      hpricot
     hike (1.2.3)
     hpricot (0.8.6)
     http_parser.rb (0.5.3)
@@ -231,8 +236,8 @@ DEPENDENCIES
   email_spec (= 1.4.0)
   factory_girl_rails (= 4.2.1)
   haml-rails (= 0.4)
-  he_integration (= 0.0.2)
   jquery-rails (= 3.0.1)
+  jumpup!
   letter_opener (= 1.1.1)
   omniauth (= 1.1.4)
   omniauth-facebook (= 1.4.1)
