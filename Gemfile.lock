@@ -1,8 +1,8 @@
 GIT
-  remote: git://github.com/mergulhao/integration.git
-  revision: 7400b10df20d29816d07dd77456f65cd482ba386
+  remote: git://github.com/Helabs/he_integration.git
+  revision: c094890d9940f4036ce399aa1d4f53f966e6f365
   specs:
-    integration (0.0.1)
+    he_integration (0.0.1)
       hpricot
 
 GEM
@@ -236,7 +236,7 @@ DEPENDENCIES
   email_spec (= 1.4.0)
   factory_girl_rails (= 4.2.1)
   haml-rails (= 0.4)
-  integration!
+  he_integration!
   jquery-rails (= 3.0.1)
   letter_opener (= 1.1.1)
   omniauth (= 1.1.4)

@@ -25,7 +25,7 @@ group :assets do
 end
 
 group :development do
-  gem 'integration', git: 'git://github.com/mergulhao/integration.git'
+  gem 'he_integration',        github: 'Helabs/he_integration'
   gem 'better_errors',      '0.9.0'
   gem 'binding_of_caller',  '0.7.2'
   gem "letter_opener",      '1.1.1'
