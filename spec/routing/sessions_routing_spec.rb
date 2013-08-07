@@ -11,7 +11,7 @@ describe PostsController do
       get("/auth/failure").should route_to("sessions#failure")
     end
     it "routes to #destroy" do
-      get("/logout").should route_to("sessions#destroy")
+      delete("/logout").should route_to("sessions#destroy")
     end
   end
 
