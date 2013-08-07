@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_filter :set_post, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate!
 
   def index
     @posts = Post.all
