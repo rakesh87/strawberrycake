@@ -19,9 +19,9 @@ describe SessionsController do
       session[:user_id].should == other_user.id
     end
 
-    it "should redirect to secret_page_path" do
+    it "should redirect to posts_path" do
       do_action
-      response.should redirect_to(secret_page_path)
+      response.should redirect_to(posts_path)
     end
 
     it "creates a new user" do
