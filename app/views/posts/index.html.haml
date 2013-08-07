@@ -1,19 +1,26 @@
-%h2 Posts
+- if current_user
+  %h2.welcome= "Aqui está um bolo de morango pra você, #{current_user.name}"
 
-- if @posts.any?
-  %table
-    %thead
-      %tr
-        %th Título
-        %th Conteúdo
-        %th Ações
-    %tbody 
-      - @posts.each do |post|
+  = link_to "Obrigado(a) pelo bolo, mas eu quero sair", logout_path, method: :delete, id: "logout-link"
+
+  = image_tag "bolo-de-morango.jpg"
+
+  %h2 Posts
+
+  - if @posts.any?
+    %table
+      %thead
         %tr
-          %td= post.title
-          %td= link_to(post.content, post_path(post))
-          %td 
-            = link_to "Editar", edit_post_path(post) 
-            = link_to "Remover", post_path(post), :confirm => "Tem certeza?", :method => :delete
-- else
-  %p Não há posts publicados
+          %th Título
+          %th Conteúdo
+          %th Ações
+      %tbody 
+        - @posts.each do |post|
+          %tr
+            %td= post.title
+            %td= link_to(post.content, post_path(post))
+            %td 
+              = link_to "Editar", edit_post_path(post) 
+              = link_to "Remover", post_path(post), :confirm => "Tem certeza?", :method => :delete
+  - else
+    %p Não há posts publicados
