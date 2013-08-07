@@ -4,37 +4,75 @@ require 'spec_helper'
 describe PostsController do
   
   describe "GET 'index'" do
-    
-    let!(:post) do
-      create(:post)
+
+    context "not logged in" do
+
+      before do
+        get :index
+      end
+
+      it "redirects to root_path" do
+        should redirect_to(root_path)
+      end
+
+      it "sets a flash message" do
+        should set_the_flash.to("Você precisa estar autenticado...")
+      end
     end
 
-    before do
-      get :index
-    end
+    context "logged in" do
 
-    it { should respond_with(:success) }
-    it { should render_template(:index) }
-    it { should render_with_layout(:application) }
+      let!(:post) do
+        create(:post)
+      end
 
-    it "should assign all posts" do
-      assigns(:posts).should include(post)
-    end
+      before do
+        login!
+        get :index
+      end
+
+      it { should respond_with(:success) }
+      it { should render_template(:index) }
+      it { should render_with_layout(:application) }
+
+      it "should assign all posts" do
+        assigns(:posts).should include(post)
+      end
+    end  
   end
 
   describe "GET 'new'" do
 
+    context "not logged in" do
+
+      before do
+        get :new
+      end      
+
+      it "redirects to root_path" do
+        should redirect_to(root_path)
+      end
+
+      it "sets a flash message" do
+        should set_the_flash.to("Você precisa estar autenticado...")
+      end
+    end
+
+    context "logged in" do
+
     before do
+      login!
       get :new
     end
 
-    it { should respond_with(:success) }
-    it { should render_template(:new) }
-    it { should render_with_layout(:application) }
+      it { should respond_with(:success) }
+      it { should render_template(:new) }
+      it { should render_with_layout(:application) }
 
-    it "should assign a new post" do
-      assigns(:post).should be_a_new(Post)
-    end
+      it "should assign a new post" do
+        assigns(:post).should be_a_new(Post)
+      end
+    end  
   end
 
   describe "POST 'create'" do
