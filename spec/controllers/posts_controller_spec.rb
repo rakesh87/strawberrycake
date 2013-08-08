@@ -2,6 +2,8 @@
 require 'spec_helper'
 
 describe PostsController do
+
+  let!(:user) { create(:user) }
   
   describe "GET 'index'" do
 
@@ -27,7 +29,7 @@ describe PostsController do
       end
 
       before do
-        login!
+        sign_in_via_facebook(user)
         get :index
       end
 
@@ -61,7 +63,7 @@ describe PostsController do
     context "logged in" do
 
     before do
-      login!
+      sign_in_via_facebook(user)
       get :new
     end
 
@@ -95,7 +97,7 @@ describe PostsController do
     context "logged in" do
 
       before do
-        login!
+        sign_in_via_facebook(user)
         get :create
       end   
 
@@ -178,7 +180,11 @@ describe PostsController do
       end
     end
 
-    context "logged in" do   
+    context "logged in" do  
+
+      before do
+        sign_in_via_facebook(user)
+      end 
 
       context "with a valid param" do
 
@@ -187,7 +193,6 @@ describe PostsController do
         end
 
         before do
-          login!
           get :show, id: post
         end
 
@@ -203,10 +208,9 @@ describe PostsController do
       context "with an invalid param" do
 
         it "should raise error" do
-            expect do
-              login!
-              get :show, id: 'wrong'
-            end.to raise_error(ActiveRecord::RecordNotFound)
+          expect do
+            get :show, id: 'wrong'
+          end.to raise_error(ActiveRecord::RecordNotFound)
         end
       end
     end    
@@ -235,6 +239,10 @@ describe PostsController do
 
     context "logged in" do
 
+      before do 
+        sign_in_via_facebook(user)
+      end
+
       context "with a valid param" do
 
         let!(:post) do
@@ -243,19 +251,16 @@ describe PostsController do
 
         it "should destroy the post" do
           expect do
-            login!
             delete :destroy, id: post
           end.to change(Post, :count).by(-1)
         end
 
         it "should redirects to post index" do
-          login!
           delete :destroy, id: post
           should redirect_to(posts_path)
         end
 
         it "should set the flash correctly" do
-          login!
           delete :destroy, id: post
           should set_the_flash[:notice].to(/sucesso/)
         end
@@ -264,7 +269,6 @@ describe PostsController do
       context "with an invalid param" do
         
         it "should raise error" do
-          login!
           expect do
             delete :destroy, id: 'wrong'
           end.to raise_error(ActiveRecord::RecordNotFound)
@@ -296,6 +300,10 @@ describe PostsController do
 
     context "logged in" do
 
+      before do
+        sign_in_via_facebook(user)
+      end
+
       context "with a valid param" do
 
         let!(:post) do
@@ -303,7 +311,6 @@ describe PostsController do
         end
 
         before do
-          login!
           get :edit, id: post
         end
 
@@ -320,7 +327,6 @@ describe PostsController do
 
         it "should raise error" do
           expect do
-            login!
             get :edit, id: 'wrong'
           end.to raise_error(ActiveRecord::RecordNotFound)
         end
@@ -351,6 +357,10 @@ describe PostsController do
 
     context "logged in" do
 
+      before do
+        sign_in_via_facebook(user)
+      end
+
       let(:post) do
         create(:post)
       end
@@ -366,25 +376,21 @@ describe PostsController do
 
         it "should update the post" do
           expect do
-            login!
             put :update, params
           end.to change{ post.reload.title }.from("Trakinas de morango").to("Trakinas meio a meio")
         end
 
         it "should assigns correct @post" do
-          login!
           put :update, params
           assigns(:post).should eq(post)
         end
 
         it "should redirects to root_path" do
-          login!
           put :update, params
           should redirect_to(posts_path)
         end
 
         it "should set the flash correctly" do
-          login!
           put :update, params
           should set_the_flash[:notice].to(/sucesso/)
         end
@@ -401,19 +407,16 @@ describe PostsController do
 
         it "should not update the post" do
           expect do
-            login!
             put :update, params
           end.to_not change{ post.title }
         end
 
         it "should assign correct @post" do
-          login!
           put :update, params
           assigns(:post).should eq(post)
         end
 
         it "should re-render the 'edit' template" do
-          login!
           put :update, params
           should render_template("edit")
         end
