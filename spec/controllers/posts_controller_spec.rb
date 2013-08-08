@@ -7,19 +7,8 @@ describe PostsController do
   
   describe "GET 'index'" do
 
-    context "not logged in" do
-
-      before do
-        get :index
-      end
-
-      it "redirects to root_path" do
-        should redirect_to(root_path)
-      end
-
-      it "sets a flash message" do
-        should set_the_flash.to("Você precisa estar autenticado...")
-      end
+    include_examples "authentication required" do
+      let(:action) { get :index }
     end
 
     context "logged in" do
@@ -45,19 +34,8 @@ describe PostsController do
 
   describe "GET 'new'" do
 
-    context "not logged in" do
-
-      before do
-        get :new
-      end      
-
-      it "redirects to root_path" do
-        should redirect_to(root_path)
-      end
-
-      it "sets a flash message" do
-        should set_the_flash.to("Você precisa estar autenticado...")
-      end
+    include_examples "authentication required" do
+      let(:action) { get :new }
     end
 
     context "logged in" do
@@ -79,26 +57,14 @@ describe PostsController do
 
   describe "POST 'create'" do
 
-    context "not logged in" do
-
-      before do
-        get :create
-      end    
-
-      it "redirects to root_path" do
-        should redirect_to(root_path)
-      end
-
-      it "sets a flash message" do
-        should set_the_flash.to("Você precisa estar autenticado...")
-      end
+    include_examples "authentication required" do
+      let(:action) { post :create }
     end
 
     context "logged in" do
 
       before do
         sign_in_via_facebook(user)
-        get :create
       end   
 
       context "with valid params" do
@@ -161,23 +127,9 @@ describe PostsController do
 
   describe "GET 'show'" do
 
-    context "not logged in" do
-
-      let!(:post) do
-        create(:post)
-      end
-
-      before do
-        get :show, id: post
-      end
-
-      it "redirects to root_path" do
-        should redirect_to(root_path)
-      end
-
-      it "sets a flash message" do
-        should set_the_flash.to("Você precisa estar autenticado...")
-      end
+    include_examples "authentication required" do
+      let!(:post) { create(:post) }
+      let(:action) { get :show, id: post }
     end
 
     context "logged in" do  
@@ -218,23 +170,9 @@ describe PostsController do
 
   describe "DELETE destroy" do
 
-    context "not logged in" do
-
-      let!(:post) do
-        create(:post)
-      end
-
-      before do
-        get :destroy, id: post
-      end
-
-      it "redirects to root_path" do
-        should redirect_to(root_path)
-      end
-
-      it "sets a flash message" do
-        should set_the_flash.to("Você precisa estar autenticado...")
-      end
+    include_examples "authentication required" do
+      let!(:post) { create(:post) }
+      let(:action) { delete :destroy, id: post }
     end
 
     context "logged in" do
@@ -277,25 +215,11 @@ describe PostsController do
     end   
   end
 
-  describe "POST 'edit'" do
+  describe "GET 'edit'" do
 
-    context "not logged in" do
-
-      let!(:post) do
-        create(:post)
-      end
-
-      before do
-        get :edit, id: post
-      end
-
-      it "redirects to root_path" do
-        should redirect_to(root_path)
-      end
-
-      it "sets a flash message" do
-        should set_the_flash.to("Você precisa estar autenticado...")
-      end
+    include_examples "authentication required" do
+      let!(:post) { create(:post) }
+      let(:action) { get :edit, id: post }
     end
 
     context "logged in" do
@@ -336,23 +260,9 @@ describe PostsController do
 
   describe "PUT 'update'" do
 
-    context "not logged in" do
-
-      let(:post) do
-        create(:post)
-      end
-
-      before do
-        get :update, id: post
-      end
-
-      it "redirects to root_path" do
-        should redirect_to(root_path)
-      end
-
-      it "sets a flash message" do
-        should set_the_flash.to("Você precisa estar autenticado...")
-      end
+    include_examples "authentication required" do
+      let!(:post) { create(:post) }
+      let(:action) { put :update, id: post }
     end
 
     context "logged in" do
