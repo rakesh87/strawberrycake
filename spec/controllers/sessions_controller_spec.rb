@@ -2,9 +2,11 @@
 require 'spec_helper'
 
 describe SessionsController do
+
   let!(:user) { create(:user, :provider => 'facebook', :uid => '12345') }
 
   describe "GET create" do
+
     def do_action
       get :create, :provider => 'facebook'
     end
@@ -13,21 +15,30 @@ describe SessionsController do
       request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
     end
 
-    it "sets user id on session" do
-      other_user = create(:user, :provider => 'facebook', :uid => '1234567')
-      do_action
-      session[:user_id].should == other_user.id
-    end
-
     it "should redirect to posts_path" do
       do_action
       response.should redirect_to(posts_path)
     end
 
-    it "creates a new user" do
-      expect do
+    context "new user" do
+
+      it "creates a new user" do
+        expect do
+          do_action
+        end.to change { User.count }.by(1)
+      end
+    end
+
+    context "user already registered" do
+
+      let!(:already_registered_user) do
+        create(:user, :provider => 'facebook', :uid => '1234567')
+      end
+
+      it "sets user id on session" do
         do_action
-      end.to change { User.count }.by(1)
+        session[:user_id].should == already_registered_user.id
+      end
     end
   end
 
