@@ -71,5 +71,10 @@ describe SessionsController do
       do_action
       response.should redirect_to(root_url)
     end
+
+    it "sets a flash message" do
+      do_action
+      should set_the_flash.to("Volte em breve!")
+    end
   end
 end
