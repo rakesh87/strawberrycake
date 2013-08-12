@@ -89,6 +89,12 @@ describe PostsController do
           assigns(:post).should be_persisted
         end
 
+        it "should create a new post with current_user" do
+          expect do
+           post :create, params 
+          end.to change{ user.posts.count }.by(1)
+        end
+
         it "should redirects to the root path" do
           post :create, params
           should redirect_to(posts_path)
