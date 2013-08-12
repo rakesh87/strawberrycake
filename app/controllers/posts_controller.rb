@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_filter :authenticate!
-  before_filter :set_post, only: [:show, :edit, :update, :destroy]  
+  before_filter :set_post, only: [:edit, :update, :destroy]  
 
   def index
     @posts = Post.all
@@ -20,10 +20,10 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
   end
 
   def edit
-    
   end
 
   def update
@@ -42,6 +42,6 @@ class PostsController < ApplicationController
   private
 
   def set_post
-    @post = Post.find(params[:id])
+    @post = current_user.posts.find(params[:id])
   end
 end

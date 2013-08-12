@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe PostsController do
 
-  let!(:user) { create(:user) }
+  let!(:user) { create(:user) }   
   
   describe "GET 'index'" do
 
@@ -13,9 +13,7 @@ describe PostsController do
 
     context "logged in" do
 
-      let!(:post) do
-        create(:post)
-      end
+      let!(:post) { create(:post) }
 
       before do
         sign_in_via_facebook(user)
@@ -63,9 +61,7 @@ describe PostsController do
 
     context "logged in" do
 
-      before do
-        sign_in_via_facebook(user)
-      end   
+      before { sign_in_via_facebook(user) } 
 
       context "with valid params" do
 
@@ -140,19 +136,13 @@ describe PostsController do
 
     context "logged in" do  
 
-      before do
-        sign_in_via_facebook(user)
-      end 
+      before { sign_in_via_facebook(user) }
 
       context "with a valid param" do
 
-        let!(:post) do
-          create(:post)
-        end
+        let!(:post) { create(:post) }
 
-        before do
-          get :show, id: post
-        end
+        before { get :show, id: post }
 
         it { should respond_with(:success) }
         it { should render_template(:show) }
@@ -174,7 +164,7 @@ describe PostsController do
     end    
   end
 
-  describe "DELETE destroy" do
+  describe "DELETE 'destroy'" do
 
     include_examples "authentication required" do
       let!(:post) { create(:post) }
@@ -183,15 +173,11 @@ describe PostsController do
 
     context "logged in" do
 
-      before do 
-        sign_in_via_facebook(user)
-      end
+      before { sign_in_via_facebook(user) }
 
-      context "with a valid param" do
+      context "my post" do
 
-        let!(:post) do
-          create(:post)
-        end
+        let(:post) { create :post, user: user }
 
         it "should destroy the post" do
           expect do
@@ -209,6 +195,17 @@ describe PostsController do
           should set_the_flash[:notice].to(/sucesso/)
         end
       end
+
+      context "with an other user's post" do
+        
+        let!(:post) { create(:post) }
+
+        it "should raise error" do
+          expect do
+            delete :destroy, id: post
+          end.to raise_error(ActiveRecord::RecordNotFound)
+        end
+      end     
 
       context "with an invalid param" do
         
@@ -230,19 +227,13 @@ describe PostsController do
 
     context "logged in" do
 
-      before do
-        sign_in_via_facebook(user)
-      end
+      before { sign_in_via_facebook(user) }
 
-      context "with a valid param" do
+      context "my post" do
 
-        let!(:post) do
-          create(:post)
-        end
+        let!(:post) { create :post, user: user }
 
-        before do
-          get :edit, id: post
-        end
+        before { get :edit, id: post }
 
         it { should respond_with(:success) }
         it { should render_template(:edit) }
@@ -253,7 +244,18 @@ describe PostsController do
         end
       end
 
-      context "with an invalid param" do
+      context "with an other user's post" do
+
+        let(:post) { create :post }
+
+        it "should raise error" do
+          expect do
+            get :edit, id: post
+          end.to raise_error(ActiveRecord::RecordNotFound)
+        end
+      end
+
+      context "with invalid post" do
 
         it "should raise error" do
           expect do
@@ -273,15 +275,11 @@ describe PostsController do
 
     context "logged in" do
 
-      before do
-        sign_in_via_facebook(user)
-      end
+      before { sign_in_via_facebook(user) }
 
-      let(:post) do
-        create(:post)
-      end
+      context "my post" do
 
-      context "with valid params" do
+        let(:post) { create :post, user: user }
 
         let(:params) do
           {
@@ -312,7 +310,27 @@ describe PostsController do
         end
       end
 
+      context "with an other user's post" do
+
+        let!(:post) { create :post }
+
+        let(:params) do
+          {
+            id: post.id,
+            post:  attributes_for(:post, title: "Trakinas meio a meio", content: "Chocolícia, Cookies, Piraquê de Morango =P")
+          }
+        end
+
+        it "should raise error" do
+          expect do
+            put :update, params
+          end.to raise_error(ActiveRecord::RecordNotFound)
+        end
+      end      
+
       context "with invalid params" do
+
+        let(:post) { create :post, user: user }
 
         let(:params) do
           {
