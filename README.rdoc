@@ -1,1 +1,5 @@
-Meu blog :)
+O Strawberrycake é apenas uma aplicação rails criada para treinar e para servir de exemplo em futuros projetos. 
+
+Por enquanto cria um gerenciador de posts com autenticação via facebook. 
+
+Aceito sugestões para melhorar meu código!
