@@ -91,7 +91,7 @@ describe PostsController do
           end.to change{ user.posts.count }.by(1)
         end
 
-        it "should redirects to the root path" do
+        it "should redirects to the posts path" do
           post :create, params
           should redirect_to(posts_path)
         end
