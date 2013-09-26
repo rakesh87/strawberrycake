@@ -17,7 +17,7 @@ describe SessionsController do
 
     it "should redirect to posts_path" do
       do_action
-      response.should redirect_to(posts_path)
+      expect(response).to redirect_to(posts_path)
     end
 
     context "new user" do
@@ -37,7 +37,7 @@ describe SessionsController do
 
       it "sets user id on session" do
         do_action
-        session[:user_id].should == already_registered_user.id
+        expect(session[:user_id]).to eq(already_registered_user.id)
       end
     end
   end
@@ -49,7 +49,7 @@ describe SessionsController do
 
     it "redirects to root url" do
       do_action
-      response.should redirect_to(root_url)
+      expect(response).to redirect_to(root_url)
     end
   end
 
@@ -64,12 +64,12 @@ describe SessionsController do
 
     it "should nuliffy user_id on sessions" do
       do_action
-      session[:user_id].should be_nil
+      expect(session[:user_id]).to be_nil
     end
 
     it "should redirect to root url" do
       do_action
-      response.should redirect_to(root_url)
+      expect(response).to redirect_to(root_url)
     end
 
     it "sets a flash message" do

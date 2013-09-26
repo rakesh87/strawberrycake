@@ -25,7 +25,7 @@ describe PostsController do
       it { should render_with_layout(:application) }
 
       it "should assign all posts" do
-        assigns(:posts).should include(post)
+        expect(assigns(:posts)).to include(post)
       end
     end  
   end
@@ -48,7 +48,7 @@ describe PostsController do
       it { should render_with_layout(:application) }
 
       it "should assign a new post" do
-        assigns(:post).should be_a_new(Post)
+        expect(assigns(:post)).to be_a_new(Post)
       end
     end  
   end
@@ -77,12 +77,12 @@ describe PostsController do
 
         it "should assigns a newly @post" do
           post :create, params
-          assigns(:post).should be_a(Post)
+          expect(assigns(:post)).to be_a(Post)
         end
 
         it "should @post be persisted" do
           post :create, params
-          assigns(:post).should be_persisted
+          expect(assigns(:post)).to be_persisted
         end
 
         it "should create a new post with current_user" do
@@ -116,7 +116,7 @@ describe PostsController do
 
         it "should assign @post with a new one" do
           post :create, params
-          assigns(:post).should be_a_new(Post)
+          expect(assigns(:post)).to be_a_new(Post)
         end
 
         it "should re-render the 'new' template" do
@@ -149,7 +149,7 @@ describe PostsController do
         it { should render_with_layout(:application) }
 
         it "should assign post" do
-          assigns(:post).should eq(post)
+          expect(assigns(:post)).to eq(post)
         end
       end
       
@@ -240,7 +240,7 @@ describe PostsController do
         it { should render_with_layout(:application) }
 
         it "should assign post" do
-          assigns(:post).should eq(post)
+          expect(assigns(:post)).to eq(post)
         end
       end
 
@@ -296,7 +296,7 @@ describe PostsController do
 
         it "should assigns correct @post" do
           put :update, params
-          assigns(:post).should eq(post)
+          expect(assigns(:post)).to eq(post)
         end
 
         it "should redirects to root_path" do
@@ -347,7 +347,7 @@ describe PostsController do
 
         it "should assign correct @post" do
           put :update, params
-          assigns(:post).should eq(post)
+          expect(assigns(:post)).to eq(post)
         end
 
         it "should re-render the 'edit' template" do

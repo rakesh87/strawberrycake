@@ -11,13 +11,13 @@ describe ApplicationController do
       end
 
       it "returns the logged user" do
-        controller.send(:current_user).should eq(user)
+        expect(controller.send(:current_user)).to eq(user)
       end
     end
 
     context "without user logged in" do
       it "returns nil" do
-        controller.send(:current_user).should be_nil
+        expect(controller.send(:current_user)).to be_nil
       end
     end
 
@@ -27,12 +27,12 @@ describe ApplicationController do
       end
 
       it "returns nil" do
-        controller.send(:current_user).should be_nil
+        expect(controller.send(:current_user)).to be_nil
       end
 
       it "unsets the session[:user_id]" do
         controller.send(:current_user)
-        session[:user_id].should be_nil
+        expect(session[:user_id]).to be_nil
       end
     end
   end
@@ -44,13 +44,13 @@ describe ApplicationController do
       end
 
       it "returns true" do
-        controller.send(:user_signed_in?).should be_true
+        expect(controller.send(:user_signed_in?)).to be_true
       end
     end
 
     context "without user logged in" do
       it "returns false" do
-        controller.send(:user_signed_in?).should be_false
+        expect(controller.send(:user_signed_in?)).to be_false
       end
     end
   end
@@ -62,7 +62,7 @@ describe ApplicationController do
       end
 
       it "returns true" do
-        controller.send(:authenticate!).should be_true
+        expect(controller.send(:authenticate!)).to be_true
       end
     end
   end
