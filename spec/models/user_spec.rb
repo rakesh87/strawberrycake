@@ -2,7 +2,6 @@
 require 'spec_helper'
 
 describe User do
-
   describe "mass assignment" do
     [:email, :name, :access_token, :uid, :provider, :photo_url].each do |attr|
       it { should allow_mass_assignment_of(attr) }
@@ -10,7 +9,6 @@ describe User do
   end
 
   describe "validations" do
-
     describe "of presence" do
       [:email, :access_token, :name, :uid].each do |attr|
         it { should validate_presence_of(attr) }
@@ -22,8 +20,7 @@ describe User do
     end
   end
 
-  describe ".find_or_create_with_omniauth(auth)" do
-    
+  describe ".find_or_create_with_omniauth(auth)" do    
     let(:auth) { OmniAuth.config.mock_auth[:facebook] }
 
     it "creates a new user" do
@@ -48,7 +45,7 @@ describe User do
       subject { User.find_or_create_with_omniauth(auth) }
 
       it "returns the user" do
-        subject.should eq(user)  
+        expect(subject).to eq(user)  
       end
 
       it "doesn't create a new user" do
