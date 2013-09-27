@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.new(params[:post])
+    @post = current_user.posts.new(post_params)
     if @post.save
       redirect_to posts_path, notice: "Post criado com sucesso!"
     else
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update_attributes(params[:post])
+    if @post.update_attributes(post_params)
       redirect_to posts_path, notice: "Post atualizado com sucesso!"
     else
       render 'edit'
@@ -44,4 +44,9 @@ class PostsController < ApplicationController
   def set_post
     @post = current_user.posts.find(params[:id])
   end
+
+  private
+    def post_params
+      params.require(:post).permit(:title, :content)
+    end
 end
