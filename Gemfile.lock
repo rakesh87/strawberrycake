@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/Helabs/jumpup-heroku.git
+  revision: ba0f2290da656383f34b04ed09cd66fd15708758
+  specs:
+    jumpup-heroku (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -226,6 +232,7 @@ DEPENDENCIES
   haml-rails (= 0.4.0)
   jquery-rails (= 3.0.4)
   jumpup (= 0.0.1)
+  jumpup-heroku!
   letter_opener (= 1.1.2)
   omniauth (= 1.1.4)
   omniauth-facebook (= 1.4.1)
