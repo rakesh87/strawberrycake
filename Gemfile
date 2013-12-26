@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby "2.0.0"
 
-gem 'rails',                    '4.0.1'
+gem 'rails',                    '4.0.2'
 gem 'unicorn',                  '4.6.3'
 gem 'unicorn-worker-killer',    '0.4.2'
 gem 'secure_headers',           '1.0.0'
