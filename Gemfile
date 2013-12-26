@@ -1,21 +1,21 @@
 source 'https://rubygems.org'
 ruby "2.0.0"
 
-gem 'rails',                    '4.0.0'
+gem 'rails',                    '4.0.1'
 gem 'unicorn',                  '4.6.3'
 gem 'unicorn-worker-killer',    '0.4.2'
 gem 'secure_headers',           '1.0.0'
 gem 'jquery-rails',             '3.0.4'
 gem 'haml-rails',               '0.4.0'
-gem 'pg',                       '0.17.0'      
+gem 'pg',                       '0.17.0'
 gem 'rack-canonical-host',      '0.0.8'
 gem 'bourbon',                  '3.1.8'
 gem 'omniauth',                 '1.1.4'
 gem 'omniauth-facebook',        '1.4.1'
 
 group :assets do
-  gem 'sass-rails',             '4.0.0'
-  gem 'coffee-rails',           '4.0.0'
+  gem 'sass-rails',             '4.0.1'
+  gem 'coffee-rails',           '4.0.1'
   gem 'uglifier',               '2.2.1'
 end
 
@@ -37,8 +37,8 @@ end
 
 group :development, :test do
   gem 'rspec-rails',            '2.14.0'
-  gem 'factory_girl_rails',     '4.2.1'
+  gem 'factory_girl_rails',     '4.3.0'
   gem 'pry-rails',              '0.3.2'
   gem 'dotenv-rails',           '0.9.0'
-  gem 'awesome_print',          '1.2.0' 
+  gem 'awesome_print',          '1.2.0'
 end
