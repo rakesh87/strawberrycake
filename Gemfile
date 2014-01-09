@@ -21,7 +21,7 @@ group :assets do
 end
 
 group :development do
-  gem 'jumpup',                 '0.0.1'
+  gem 'jumpup',                 '0.0.2'
   gem 'better_errors',          '1.0.1'
   gem 'binding_of_caller',      '0.7.2'
   gem "letter_opener",          '1.1.2'
