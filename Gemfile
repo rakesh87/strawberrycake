@@ -12,7 +12,7 @@ gem 'rack-canonical-host',      '0.0.8'
 gem 'bourbon',                  '3.1.8'
 gem 'omniauth',                 '1.1.4'
 gem 'omniauth-facebook',        '1.4.1'
-gem 'jumpup-heroku',            github: 'Helabs/jumpup-heroku'
+gem 'jumpup-heroku',            '0.0.1'
 
 group :assets do
   gem 'sass-rails',             '4.0.1'
